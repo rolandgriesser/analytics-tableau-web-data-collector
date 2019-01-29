@@ -1,3 +1,4 @@
+/* global tableau, $, moment */
 var dimensions = [
   "AD",
   "ANALYTICS_VERSION",
@@ -199,8 +200,8 @@ var dimensions = [
     }
 
     return {
-      isValid,
-      value
+      isValid: isValid,
+      value: value
     };
   }
   // Create event listeners for when the user submits the form
@@ -287,8 +288,8 @@ var dimensions = [
       var groupBy = [];
       if (temp.value.length > 0) {
         try {
-          temp.value = temp.value.replace(",", '","');
-          groupBy = eval('(["' + temp.value + '"])').map(function(v) {
+          temp.value = temp.value.replace(",", "','");
+          groupBy = eval("(['" + temp.value + "'])").map(function(v) {
             return v.trim();
           });
         } catch (e) {
@@ -315,17 +316,17 @@ var dimensions = [
       }
 
       var request = {
-        apiKey,
-        licenseKey,
-        aggregation,
-        dimension,
-        filters,
-        groupBy,
-        limit,
-        offset,
-        interval,
-        startDate,
-        endDate
+        apiKey: apiKey,
+        licenseKey: licenseKey,
+        aggregation: aggregation,
+        dimension: dimension,
+        filters: filters,
+        groupBy: groupBy,
+        limit: limit,
+        offset: offset,
+        interval: interval,
+        startDate: startDate,
+        endDate: endDate
       };
       tableau.connectionData = JSON.stringify(request);
       tableau.connectionName = "Bitmovin Analytics";
