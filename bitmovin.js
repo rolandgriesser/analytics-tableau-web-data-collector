@@ -89,7 +89,7 @@ var dimensions = [
     request.groupBy.forEach(function(field) {
       cols.push({
         id: field,
-        dataType: tableau.dataTypeEnum.text
+        dataType: tableau.dataTypeEnum.string
       });
     });
 
