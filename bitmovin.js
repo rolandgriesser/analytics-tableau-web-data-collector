@@ -115,13 +115,15 @@ var dimensions = [
       hasInterval = true;
     }
 
-    return response.map(row => {
+    return response.map(function(row) {
       var result = {};
       if (hasInterval) {
         result.time = moment(row[0]).toDate();
       }
       request.groupBy.map(
-        (groupBy, index) => (result[groupBy] = row[index + groupByStartIndex])
+        function(groupBy, index) { 
+          result[groupBy] = row[index + groupByStartIndex];
+        }
       );
       result.dimension = row[row.length - 1];
       return result;
@@ -222,27 +224,39 @@ var dimensions = [
       .date(moment().subtract(7, "days"));
 
     $("#submitButton").click(function(e) {
-      var temp = validateAndGetValue($("#inputApiKey"), input => input.val());
+      var temp = validateAndGetValue($("#inputApiKey"), function(input) {
+        return input.val();
+      });
       var isValid = temp.isValid;
       var apiKey = temp.value;
 
-      temp = validateAndGetValue($("#inputLicenseKey"), input => input.val());
+      temp = validateAndGetValue($("#inputLicenseKey"), function(input) {
+        return input.val();
+      });
       isValid &= temp.isValid;
       var licenseKey = temp.value;
 
-      temp = validateAndGetValue($("#selectAggregation"), input => input.val());
+      temp = validateAndGetValue($("#selectAggregation"), function(input) {
+        return input.val();
+      });
       isValid &= temp.isValid;
       var aggregation = temp.value;
 
-      temp = validateAndGetValue($("#selectInterval"), input => input.val());
+      temp = validateAndGetValue($("#selectInterval"), function(input) {
+        return input.val();
+      });
       isValid &= temp.isValid;
       var interval = temp.value;
 
-      temp = validateAndGetValue($("#selectDimension"), input => input.val());
+      temp = validateAndGetValue($("#selectDimension"), function(input) {
+        return input.val();
+      });
       isValid &= temp.isValid;
       var dimension = temp.value;
 
-      temp = validateAndGetValue($("#inputFilter"), input => input.val());
+      temp = validateAndGetValue($("#inputFilter"), function(input) {
+        return input.val();
+      });
       isValid &= temp.isValid;
       var filters = [];
       if (temp.value.length > 0) {
@@ -254,36 +268,44 @@ var dimensions = [
         }
       }
 
-      temp = validateAndGetValue($("#inputLimit"), input => input.val());
+      temp = validateAndGetValue($("#inputLimit"), function(input) {
+        return input.val();
+      });
       isValid &= temp.isValid;
       var limit = temp.value;
 
-      temp = validateAndGetValue($("#inputOffset"), input => input.val());
+      temp = validateAndGetValue($("#inputOffset"), function(input) {
+        return input.val();
+      });
       isValid &= temp.isValid;
       var offset = temp.value;
 
-      temp = validateAndGetValue($("#inputGroupBy"), input => input.val());
+      temp = validateAndGetValue($("#inputGroupBy"), function(input) {
+        return input.val();
+      });
       isValid &= temp.isValid;
       var groupBy = [];
       if (temp.value.length > 0) {
         try {
           temp.value = temp.value.replace(",", '","');
-          groupBy = eval('(["' + temp.value + '"])').map(v => v.trim());
+          groupBy = eval('(["' + temp.value + '"])').map(function(v) {
+            return v.trim();
+          });
         } catch (e) {
           $("#inputGroupBy").addClass("is-invalid");
           isValid = false;
         }
       }
 
-      temp = validateAndGetValue($("#datePickerFrom"), input =>
-        input.data("datetimepicker").date()
-      );
+      temp = validateAndGetValue($("#datePickerFrom"), function(input) {
+        return input.data("datetimepicker").date();
+      });
       isValid &= temp.isValid;
       var startDate = temp.value;
 
-      temp = validateAndGetValue($("#datePickerTo"), input =>
-        input.data("datetimepicker").date()
-      );
+      temp = validateAndGetValue($("#datePickerTo"), function(input) {
+        return input.data("datetimepicker").date();
+      });
       isValid &= temp.isValid;
       var endDate = temp.value;
 
