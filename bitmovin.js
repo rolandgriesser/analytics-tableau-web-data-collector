@@ -88,7 +88,8 @@ var dimensions = [
 
     request.groupBy.forEach(function(field) {
       cols.push({
-        id: field
+        id: field,
+        dataType: tableau.dataTypeEnum.text
       });
     });
 
@@ -123,7 +124,7 @@ var dimensions = [
       }
       request.groupBy.map(
         function(groupBy, index) { 
-          result[groupBy] = row[index + groupByStartIndex];
+          result[groupBy] = String(row[index + groupByStartIndex]);
         }
       );
       result.dimension = row[row.length - 1];
