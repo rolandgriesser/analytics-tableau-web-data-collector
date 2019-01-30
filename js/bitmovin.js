@@ -219,10 +219,10 @@ var dimensions = [
 
     $(".input-group.date").datetimepicker();
     $("#datePickerTo")
-      .data("datetimepicker")
+      .data("DateTimePicker")
       .date(moment());
     $("#datePickerFrom")
-      .data("datetimepicker")
+      .data("DateTimePicker")
       .date(moment().subtract(7, "days"));
 
     $("#submitButton").click(function(e) {
